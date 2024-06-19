@@ -3,8 +3,8 @@ FROM ubuntu:jammy
 # Set environment variables to avoid interactive installation
 ENV DEBIAN_FRONTEND noninteractive
 # Set environment variables for TERRAFORM and PACKER
-ENV TF_VERSION 1.8.0
-ENV PACKER_VERSION 1.10.2
+ENV TF_VERSION 1.8.5
+ENV PACKER_VERSION 1.11.0
  
 RUN apt-get update
 
