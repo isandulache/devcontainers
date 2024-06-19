@@ -1,0 +1,87 @@
+{
+  "build" : {"dockerfile": "Dockerfile.dockerfile"},
+  "containerEnv": { "TZ": "Europe/Paris" },
+  "name": "Azure DevOps",    
+  "customizations": {
+    "codespaces": {
+      "settings": {
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash",
+            "icon": "terminal-bash"
+          },
+          "pwsh": {
+            "path": "/usr/bin/pwsh",
+            "icon": "terminal-powershell"
+          },
+          "JavaScript Debug Terminal": null
+        },
+        "terraform.languageServer": {
+          "enabled": true,
+          "args": [
+            "serve"
+          ]
+        },
+        "workbench.iconTheme": "Material Icon Theme"
+      },
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-azuretools.vscode-bicep",
+        "hashicorp.terraform",
+		    "hashicorp.hcl",
+        "ms-vscode.powershell",
+        "redhat.vscode-yaml",
+        "msazurermtools.azurerm-vscode-tools",
+        "bencoleman.armview",
+        "donjayamanne.githistory",
+        "eamodio.gitlens",
+        "pkief.material-icon-theme",
+        "redhat.vscode-yaml",
+        "wengerk.highlight-bad-chars",
+        "shd101wyy.markdown-preview-enhanced",
+        "GitHub.copilot"
+      ]
+    },
+    "vscode": {
+      "settings": {
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash",
+            "icon": "terminal-bash"
+          },
+          "pwsh": {
+            "path": "/usr/bin/pwsh",
+            "icon": "terminal-powershell"
+          },
+          "JavaScript Debug Terminal": null
+        },
+        "terraform.languageServer": {
+          "enabled": true,
+          "args": [
+            "serve"
+          ]
+        }
+      },
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-azuretools.vscode-bicep",
+        "hashicorp.terraform",
+        "hashicorp.hcl",
+        "ms-vscode.powershell",
+        "redhat.vscode-yaml",
+        "msazurermtools.azurerm-vscode-tools",
+        "bencoleman.armview",
+        "donjayamanne.githistory",
+        "eamodio.gitlens",
+        "hashicorp.hcl",
+        "pkief.material-icon-theme",
+        "redhat.vscode-yaml",
+        "wengerk.highlight-bad-chars",
+        "shd101wyy.markdown-preview-enhanced",
+        "GitHub.copilot"
+      ]
+    }
+  }
+}
