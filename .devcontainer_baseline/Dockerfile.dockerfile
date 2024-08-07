@@ -1,16 +1,20 @@
 # Use the official Ubuntu 22.04 image as the base
+# [dev_container_auto_added_stage_label  1/8]
 FROM ubuntu:jammy
 # Set environment variables to avoid interactive installation
 ENV DEBIAN_FRONTEND noninteractive
 # Set environment variables for TERRAFORM and PACKER
-ENV TF_VERSION 1.8.5
-ENV PACKER_VERSION 1.11.0
+ENV TF_VERSION 1.9.0
+ENV PACKER_VERSION 1.11.1
  
+
+# [dev_container_auto_added_stage_label  2/8]
 RUN apt-get update
 
 # Install baseline packages
 ENV base_packages="apt-transport-https gcc ca-certificates curl git gnupg jq krb5-user krb5-config libffi-dev libkrb5-dev libssl-dev lsb-release openssh-client sshpass unzip tzdata vim dos2unix"
 
+# [dev_container_auto_added_stage_label  3/8]
 RUN	apt-get install -y --no-install-recommends $base_packages \
     && rm -rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
@@ -24,19 +28,23 @@ RUN	apt-get install -y --no-install-recommends $base_packages \
 #     && ansible-galaxy collection install azure.azcollection community.general \
 #     && pip install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
  
-# Terraform & packer
+# Terraform
+# [dev_container_auto_added_stage_label  4/8]
 RUN curl -O https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip \
-    && unzip terraform_${TF_VERSION}_linux_amd64.zip -d /usr/bin \
+    && unzip -o terraform_${TF_VERSION}_linux_amd64.zip -d /usr/bin \
     && rm -f terraform_${TF_VERSION}_linux_amd64.zip \
     && chmod +x /usr/bin/terraform \
+
     && curl -O https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip \
-    && unzip packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/bin \
+    && unzip -o packer_${PACKER_VERSION}_linux_amd64.zip -d /usr/bin \
     && rm -f packer_${PACKER_VERSION}_linux_amd64.zip \
     && chmod +x /usr/bin/packer
 
 # Install Azure CLI 
+# [dev_container_auto_added_stage_label  5/8]
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
  
+# [dev_container_auto_added_stage_label  6/8]
 # Powershell for Linux
 RUN apt-get install -y wget software-properties-common \
     && . /etc/os-release \
@@ -50,11 +58,13 @@ RUN apt-get install -y wget software-properties-common \
     && apt-get clean
 
 # Terraform doc
+# [dev_container_auto_added_stage_label  7/8]
 RUN curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.17.0/terraform-docs-v0.17.0-$(uname)-amd64.tar.gz \
     && tar -xzf terraform-docs.tar.gz \
     && chmod +x terraform-docs
 
 # Install tflint
+# [dev_container_auto_added_stage_label  8/8]
 RUN curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash    
 
 # Instal other utilities
@@ -75,6 +85,5 @@ RUN curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/in
 # EXPOSE 3128
 # # Run Squid in the foreground
 # CMD ["squid", "-N"]
-
 
 CMD    ["/bin/bash"]
